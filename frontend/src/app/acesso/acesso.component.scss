@@ -1,0 +1,40 @@
+.acesso {
+  text-align: center;
+  margin: 20px;
+}
+
+.acesso div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.acesso h1 {
+  margin-left: 10px;
+}
+
+.acesso form {
+  display: grid;
+  gap: 16px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.acesso textarea {
+  width: 100%;
+}
+
+.acesso input {
+  width: 100%;
+}
+
+.acesso button {
+  width: 10%;
+  font-size: 100%;
+}
+
+.acesso svg{
+  margin-right: -7px;
+}
+

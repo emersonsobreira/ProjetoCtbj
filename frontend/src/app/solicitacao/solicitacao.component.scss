@@ -1,0 +1,41 @@
+.Solicitacao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.Solicitacao div {
+  display: flex;
+  align-items: center;
+}
+
+.Solicitacao svg {
+  margin-right: 4px;
+}
+
+.Solicitacao form {
+  width: 100%;
+  max-width: 300px;
+  display: grid;
+  gap: 8px;
+}
+
+.Solicitacao div {
+  margin-bottom: 8px;
+}
+
+.Solicitacao mat-form-field {
+  width: 100%;
+}
+
+.Solicitacao .solicitacao-butao {
+  grid-column: span 3;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.Solicitacao .solicitacao-butao button {
+  width: 100%;
+  max-width: 150px;
+}

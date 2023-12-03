@@ -1,0 +1,19 @@
+.cadastro-aluno {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px; /* Ajuste conforme necessário para a margem no topo */
+  }
+
+  .cadastro-aluno form {
+    width: 100%;
+    max-width: 400px; /* Ajuste conforme necessário para limitar a largura do formulário */
+  }
+
+  .cadastro-aluno div {
+    margin-bottom: 16px; /* Adiciona espaçamento entre os campos do formulário */
+  }
+
+  .cadastro-aluno mat-form-field {
+    width: 100%;
+  }

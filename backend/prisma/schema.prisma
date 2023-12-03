@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// prisma/schema.prisma
+
+model Aluno {
+  id           Int           @id @default(autoincrement())
+  nome         String        @db.VarChar(60)
+  matricula    Int           @unique
+  turma        Turma         @relation(fields: [turma_id], references: [id])
+  turma_id     Int
+  solicitacoes Solicitacao[]
+  acesso       Acesso[]
+  // email    senha *
+  email        String        @unique
+  senha        String        @db.VarChar(40)
+}
+
+model Turma {
+  id     Int           @id @default(autoincrement())
+  nome   String        @db.VarChar(50)
+  alunos Aluno[]
+  cursos Curso_Turma[]
+}
+
+model Curso {
+  id     Int           @id @default(autoincrement())
+  nome   String        @unique @db.VarChar(40)
+  turmas Curso_Turma[]
+}
+
+model Professor {
+  id   Int    @id @default(autoincrement())
+  nome String @db.VarChar(60)
+
+  solicitacoes Solicitacao[]
+}
+
+model Objeto {
+  id           Int           @id @default(autoincrement())
+  nome         String?       @db.VarChar(60)
+  pc           Pc            @relation(fields: [pc_id], references: [id])
+  pc_id        Int
+  solicitacoes Solicitacao[]
+}
+
+model Pc {
+  id      Int      @id @default(autoincrement())
+  objetos Objeto[]
+}
+
+model Solicitacao {
+  id                Int       @id @default(autoincrement())
+  descricao         String 
+  data_hora_entrada DateTime
+  data_hora_saida   DateTime
+  status            Status? // tornando o campo status opcional
+  professor         Professor @relation(fields: [professor_id], references: [id])
+  professor_id      Int
+  objeto            Objeto?   @relation(fields: [objeto_id], references: [id]) // Especificando fields e references
+  objeto_id         Int? // Tornando o campo objeto_id opcional
+  aluno             Aluno     @relation(fields: [aluno_id], references: [id])
+  aluno_id          Int
+  created_at        DateTime  @default(now()) @db.Timestamp(0)
+  acesso            Acesso[]
+
+}
+ enum Status {
+  PENDENTE
+  APROVADA
+  REJEITADA
+}
+
+model Acesso {
+  id                Int         @id @default(autoincrement())
+  descricao         String      @db.VarChar(60)
+  data_hora_entrada DateTime
+  data_hora_saida   DateTime
+  aluno             Aluno       @relation(fields: [aluno_id], references: [id])
+  aluno_id          Int
+  solicitacao       Solicitacao @relation(fields: [solicitacao_id], references: [id])
+  solicitacao_id    Int
+}
+
+model Curso_Turma {
+  id       Int    @default(autoincrement())
+  periodo  String @db.VarChar(60)
+  curso    Curso  @relation(fields: [curso_id], references: [id])
+  curso_id Int
+  turma    Turma  @relation(fields: [turma_id], references: [id])
+  turma_id Int
+
+  @@id([id, curso_id, turma_id])
+}
